@@ -1,8 +1,8 @@
 {
-  "name": "",
-  "version": "",
-  "description": "",
-  "author": "",
+  "name": "reviews",
+  "version": "1.0.0",
+  "description": "Individual Reviews Component",
+  "author": "PlasmaIntec",
   "license": "",
   "engines": {
     "node": ">=6.13.0"

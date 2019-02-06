@@ -1,13 +1,10 @@
 # Project Name
 
-> Project description
+> Individual Reviews Component
 
 ## Related Projects
 
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
+  - https://github.com/hrsf-placeholders
 
 ## Table of Contents
 
