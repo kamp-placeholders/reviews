@@ -1,0 +1,104 @@
+#reviews {
+}
+
+#reviews .review {
+	display: flex;
+	flex-direction: row;
+	font-family: Segoe UI;
+	color: darkBlue;
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+	border-bottom: 1px grey solid;
+}
+
+#reviews .review .profile {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	font-size: .875rem;
+	font-weight: 500;
+	margin-left: 1rem;
+	margin-right: 1rem;
+	width: 6rem;
+}
+
+#reviews .review .profile .circle {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: tan;
+	color: white;
+	font-weight: 500;
+	text-transform: capitalize;
+	width: 3rem;
+	height: 3rem;
+	border-radius: 50%;
+}
+
+#reviews .review .profile .author {
+	margin-top: .5rem;
+}
+
+#reviews .review .profile .city {
+	margin-top: .5rem;
+	color: grey;
+}
+
+#reviews .review .profile .pastReviews {
+	margin-top: .5rem;
+}
+
+#reviews .review .userReview {
+	display: flex;
+	flex-direction: column;
+}
+
+#reviews .review .userReview .banner {
+	display: flex;
+	flex-direction: column;
+}
+
+#reviews .review .userReview .banner .starsAndDate {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	font-size: .875rem;
+	font-weight: 500;
+}
+
+#reviews .review .userReview .banner .starsAndDate .date::before {
+	content: '\B7';
+	color: black;
+  padding-left: .5rem;
+  padding-right: 0.5rem;
+  font-weight: bolder;
+}
+
+#reviews .review .userReview .banner .ratings {
+	display: flex;
+	flex-direction: row;
+	font-weight: bolder;
+	font-size: .875rem;
+	margin-top: 0.5rem;
+}
+
+#reviews .review .userReview .banner .ratings div {
+	padding-left: .5rem;
+	color: red;
+}
+
+#reviews .review .userReview .banner .ratings div:not(:last-child)::after {
+	content: '\B7';
+	color: black;
+  padding-left: .5rem;
+  padding-right: .5rem;
+  font-weight: bolder;
+}
+
+#reviews .review .userReview .post {
+	white-space: pre-wrap;
+	margin-top: 1.5rem;
+	margin-bottom: 1.5rem;
+}
