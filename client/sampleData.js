@@ -1,6 +1,8 @@
+var faker = require('faker');
+
 var reviews = [
 {
-	'name': 'EricC',
+	'name': faker.name.firstName(),
 	'city': 'San Francisco',
 	'stars': 4,
 	'pastReviews': 2,
