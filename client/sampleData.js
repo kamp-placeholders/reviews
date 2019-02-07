@@ -2,7 +2,7 @@ var faker = require('faker');
 
 var reviews = [
 {
-	'name': faker.name.firstName(),
+	'name': 'EricC',
 	'city': 'San Francisco',
 	'stars': 4,
 	'pastReviews': 2,
@@ -45,6 +45,21 @@ Garrett was a great server, oyster maven!`,
 		'food': 3,
 		'service': 1,
 		'ambience': 1
+	}
+},
+{
+	'name': faker.name.firstName(),
+	'city': faker.address.city(),
+	'stars': faker.random.number() % 6,
+	'pastReviews': faker.random.number(),
+	'isVIP': faker.random.boolean(),
+	'date': `${faker.date.recent().toLocaleString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' })}`,
+	'review': {
+		'post': faker.lorem.paragraph(),
+		'overall': faker.random.number() % 6,
+		'food': faker.random.number() % 6,
+		'service': faker.random.number() % 6,
+		'ambience': faker.random.number() % 6
 	}
 }
 ];

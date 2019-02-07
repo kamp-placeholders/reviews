@@ -52,6 +52,7 @@
 #reviews .review .userReview {
 	display: flex;
 	flex-direction: column;
+	width: 100%;
 }
 
 #reviews .review .userReview .banner {

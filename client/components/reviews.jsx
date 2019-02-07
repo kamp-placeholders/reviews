@@ -36,7 +36,6 @@ var circleColorRoulette = (name) => {
 	var green = name.charCodeAt(name.length - 1) % 256;
 	var blue = name.charCodeAt(~~(name.length / 2)) % 256;
 	var colors = `rgb(${red},${green},${blue})`;
-	console.log(colors);
 	return colors;
 };
 
