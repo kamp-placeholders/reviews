@@ -39,7 +39,7 @@ var circleColorRoulette = (name) => {
 	return colors;
 };
 
-var Reviews = (props) => {
+var IndividualReviews = (props) => {
 	return (<div>
 	{
 		props.reviews.map(review => (
@@ -97,4 +97,4 @@ var Reviews = (props) => {
 	</div>);
 };
 
-module.exports = Reviews;
+module.exports = IndividualReviews;

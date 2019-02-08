@@ -5,16 +5,16 @@ var fakeReview = () => {
 	var review = {
 		'name': faker.name.firstName(),
 		'city': faker.address.city(),
-		'stars': faker.random.number() % 6,
+		'stars': faker.random.number() % 5 + 1,
 		'pastReviews': faker.random.number(),
 		'isVIP': faker.random.boolean(),
 		'date': `${faker.date.recent().toLocaleString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' })}`,
 		'review': {
 			'post': faker.lorem.paragraph(),
-			'overall': faker.random.number() % 6,
-			'food': faker.random.number() % 6,
-			'service': faker.random.number() % 6,
-			'ambience': faker.random.number() % 6
+			'overall': faker.random.number() % 5 + 1,
+			'food': faker.random.number() % 5 + 1,
+			'service': faker.random.number() % 5 + 1,
+			'ambience': faker.random.number() % 5 + 1
 		}
 	};
 	return review;
