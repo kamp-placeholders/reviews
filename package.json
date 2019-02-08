@@ -10,7 +10,8 @@
   "scripts": {
     "start": "nodemon ./server/server.js",
     "build": "webpack -w",
-    "test": "jest"
+    "test": "jest",
+    "seed": "node seed.js"
   },
   "jest": {
     "rootDir": "specs",
@@ -21,6 +22,7 @@
     "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
+    "axios": "^0.18.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
@@ -33,6 +35,7 @@
     "jest": "^24.1.0",
     "morgan": "^1.9.0",
     "mysql": "^2.16.0",
+    "node-fetch": "^2.3.0",
     "puppeteer": "^1.12.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",

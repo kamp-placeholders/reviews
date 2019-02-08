@@ -1,4 +1,5 @@
 const express = require('express');
+const parser = require('body-parser');
 const morgan = require('morgan');
 const path = require('path');
 const app = express();
@@ -9,11 +10,24 @@ const db = require('./db');
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, '../public')));
 
-app.get('/api', (req, res) => {
+app.get('/api/reviews', (req, res) => {
 	db.get((results) => {
 		res.send(results);
-	})
-})
+	});
+});
+
+app.delete('/api/reviews', (req, res) => {
+	db.deleteTable((results) => {
+		res.send(results);
+	});
+});
+
+app.post('/api/reviews', parser.json(), (req, res) => {
+	console.log('JSON:', req.body);
+	db.post(req.body, (results) => {
+		res.send(results);
+	});
+});
 
 app.listen(port, () => {
   console.log(`server running at: http://localhost:${port}`);
