@@ -1,6 +1,6 @@
 import React from 'react';
 
-// generate array of ratings for a given property
+// generate object of ratings for a given property
 var collectRatings = (arr, property, isReviewProperty) => {
 	var ratings = {};
 	arr.forEach(review => {
@@ -35,28 +35,59 @@ var AggregateReviews = (props) => {
 		}
 	});
 	var averageMetricKeys = Object.keys(averageMetrics);
-	for (var averageMetricKey of Object.keys(averageMetrics)) {
+	for (var averageMetricKey of averageMetricKeys) {
 		averageMetrics[averageMetricKey] /= props.reviews.length;
 		averageMetrics[averageMetricKey] = averageMetrics[averageMetricKey].toFixed(1);
 	}
+	var stars = collectRatings(props.reviews, 'stars', false);
+	var totalStars = Object.keys(stars).reduce((acc, cur) => {
+		return acc + Number(stars[cur]);
+	}, 0);
+	var starsProportion = {};
+	Object.keys(stars).forEach(key => {
+		starsProportion[key] = stars[key] / totalStars * 100;
+	});
 	return (
 		<div className='reviewsSummary'>
-			Overall ratings and reviews
-			<div className='metrics'>
-				{
-					averageMetricKeys.map(averageMetric => (
-						<div className='metric'>
-							<div className='metricValue'>
-								{averageMetrics[averageMetric]}
-							</div>
-							<div className='metricName'>
-								{averageMetric}
-							</div>
-						</div>
-					))
-				}
+			<div className='reviewsCount'>
+				What {props.reviews.length} people are saying
 			</div>
-			{console.log(collectRatings(props.reviews, 'stars', false))}
+			<div className='aggregate'>
+				<div>
+					<div className='description'>
+						Overall ratings and reviews
+					</div>
+					<div className='metrics'>
+						{
+							averageMetricKeys.map(averageMetric => (
+								<div className='metric'>
+									<div className='metricValue'>
+										{averageMetrics[averageMetric]}
+									</div>
+									<div className='metricName'>
+										{averageMetric}
+									</div>
+								</div>
+							))
+						}
+					</div>
+				</div>
+				<div className='aggregateStars'>
+					{
+						Object.keys(stars).reverse().map(star => (
+							<div className='starBar'>
+								<span className='star'>
+									{star}
+								</span>
+								<div className='bar'>
+									<span style={{'width': `${starsProportion[star]}%`}} className='redBar'></span>
+								</div>
+							</div>
+						))
+					}
+				</div>
+			</div>
+		{console.log(stars, totalStars)}
 		</div>
 	);	
 };

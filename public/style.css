@@ -2,12 +2,29 @@
 	font-family: Segoe UI;
 }
 
-#reviews .reviewsSummary .metrics {
+#reviews .reviewsSummary .reviewsCount {
+	font-size: 1.5rem;
+	font-weight: bold;
+	padding-bottom: 1rem;
+	margin-bottom: 1rem;
+	border-bottom: 1px solid grey;
+}
+
+#reviews .reviewsSummary .aggregate {
+	display: flex;
+}
+
+#reviews .reviewsSummary .aggregate .description {
+	font-weight: 500;
+	padding-bottom: 1rem;
+}
+
+#reviews .reviewsSummary .aggregate .metrics {
 	display: flex;
 	flex-direction: row;
 }
 
-#reviews .reviewsSummary .metrics .metric {
+#reviews .reviewsSummary .aggregate .metrics .metric {
 	display: flex;
 	flex-direction: column;
 	text-align: center;
@@ -15,22 +32,52 @@
 	padding: 0 .5rem;
 }
 
-#reviews .reviewsSummary .metrics .metric .metricValue {
+#reviews .reviewsSummary .aggregate .metrics .metric .metricValue {
 	font-weight: 500;
 }
 
-#reviews .reviewsSummary .metrics .metric .metricName {
+#reviews .reviewsSummary .aggregate .metrics .metric .metricName {
 	text-transform: capitalize;
 }
 
-#reviews .reviewsSummary .metrics .metric:not(:last-child):after {
+#reviews .reviewsSummary .aggregate .metrics .metric:not(:last-child):after {
 	display: block;
 	position: absolute;
 	right: 0;
-	background: grey;
+	background: lightGray;
 	content: '';
 	height: 100%;
 	width: 1px;
+}
+
+#reviews .reviewsSummary .aggregate .aggregateStars {
+	display: flex;
+	flex-direction: column;
+	padding-top: 2rem;
+	width: 16rem;
+}
+
+#reviews .reviewsSummary .aggregate .starBar {
+	display: flex;
+	padding-bottom: .5rem;
+}
+
+#reviews .reviewsSummary .aggregate .starBar .star {
+	padding-right: .5rem;
+	width: 1rem;
+}
+
+#reviews .reviewsSummary .aggregate .starBar .bar {
+	display: flex;
+	flex: auto;
+	align-items: center;
+	border: 1px solid lightGray;
+	width: 100%;
+}
+
+#reviews .reviewsSummary .aggregate .starBar .redBar {
+	background: crimson;
+	height: 100%;
 }
 
 #reviews .review {
