@@ -24,8 +24,14 @@ app.delete('/api/reviews', (req, res) => {
 
 app.post('/api/reviews', parser.json(), (req, res) => {
 	console.log('JSON:', req.body);
-	db.post(req.body, (results) => {
-		res.send(results);
+	db.post(req.body, (results, err) => {
+		if (err) {
+			console.error(err);
+			res.send(400);
+		} else {
+			console.log('posted');
+			res.send(results);
+		}
 	});
 });
 

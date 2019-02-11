@@ -14,9 +14,43 @@
 	display: flex;
 }
 
+#reviews .reviewsSummary .aggregate .leftAggregate {
+	margin-right: 2rem;
+}
+
 #reviews .reviewsSummary .aggregate .description {
 	font-weight: 500;
 	padding-bottom: 1rem;
+}
+
+#reviews .reviewsSummary .aggregate .overallStars {
+	display: flex;
+	font-size: .875rem;
+	padding-bottom: 1rem;
+}
+
+#reviews .reviewsSummary .aggregate .overallStars .overlay {
+	display: flex;
+	width: 80px;
+	margin-right: 1rem;
+}
+
+#reviews .reviewsSummary .aggregate .overallStars .background {
+	display: block;
+	position: absolute;
+	float: left;
+}
+
+#reviews .reviewsSummary .aggregate .overallStars .foreground {
+	display: block;
+	position: absolute;
+	float: left;
+}
+
+#reviews .dynamicWidth {
+	overflow: hidden;
+	height: 1rem;
+	white-space: nowrap;
 }
 
 #reviews .reviewsSummary .aggregate .metrics {
@@ -60,11 +94,13 @@
 #reviews .reviewsSummary .aggregate .starBar {
 	display: flex;
 	padding-bottom: .5rem;
+	align-items: center;
 }
 
 #reviews .reviewsSummary .aggregate .starBar .star {
 	padding-right: .5rem;
 	width: 1rem;
+	text-align: center;
 }
 
 #reviews .reviewsSummary .aggregate .starBar .bar {
@@ -72,7 +108,9 @@
 	flex: auto;
 	align-items: center;
 	border: 1px solid lightGray;
+	box-sizing: border-box;
 	width: 100%;
+	height: 1rem;
 }
 
 #reviews .reviewsSummary .aggregate .starBar .redBar {

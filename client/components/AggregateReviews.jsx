@@ -2,7 +2,7 @@ import React from 'react';
 
 // generate object of ratings for a given property
 var collectRatings = (arr, property, isReviewProperty) => {
-	var ratings = {};
+	var ratings = { '1':null, '2':null, '3':null, '4':null, '5':null };
 	arr.forEach(review => {
 		if (isReviewProperty) {
 			ratings[review.review[property]] = ratings[review.review[property]] ? ratings[review.review[property]] + 1 : 1;
@@ -23,6 +23,31 @@ var neuter = (obj, property) => {
 // helper function
 var avg = (arr) => {
 	return arr.reduce((acc, cur) => acc + cur) / arr.length;
+};
+
+// helper function
+var sum = (arr) => {
+	return arr.reduce((acc, cur) => acc + cur);
+};
+
+// SVG template for rating stars
+var star = (color) => ( 
+	<svg height="16px" width="16px" viewBox="-1 -1 2 2">
+	  <polygon points="0,-1 .588,.809 -.95,-.31 .95,-.31 -.588,.809"
+	  fill={color} />
+	</svg>
+);
+
+// genererate dynamic-width star rating
+var fillStars = (red, percentage) => {
+	var stars = Array(5);
+	stars.fill(star('crimson'), 0, red);
+	stars.fill(star('lightGray'), red);
+	return (
+		<div className='dynamicWidth' style={{'width': `${percentage}%`}}>
+			{stars}
+		</div>
+	);
 };
 
 var AggregateReviews = (props) => {
@@ -47,15 +72,27 @@ var AggregateReviews = (props) => {
 	Object.keys(stars).forEach(key => {
 		starsProportion[key] = stars[key] / totalStars * 100;
 	});
+	var averageStars = sum(Object.keys(stars).map(star => stars[star] * Number(star))) / sum(Object.keys(stars).map(star => stars[star]));
 	return (
 		<div className='reviewsSummary'>
 			<div className='reviewsCount'>
 				What {props.reviews.length} people are saying
 			</div>
 			<div className='aggregate'>
-				<div>
+				<div className='leftAggregate'>
 					<div className='description'>
 						Overall ratings and reviews
+					</div>
+					<div className='overallStars'>
+						<div className='overlay'>
+							<div className='background'>
+								{ fillStars(0, 100) }
+							</div>
+							<div className="foreground">
+								{ fillStars(5, averageStars / 5 * 100) }
+							</div>
+						</div>
+						{ (averageStars).toFixed(1) } based on recent ratings
 					</div>
 					<div className='metrics'>
 						{
@@ -87,7 +124,7 @@ var AggregateReviews = (props) => {
 					}
 				</div>
 			</div>
-		{console.log(stars, totalStars)}
+		{console.log(stars, totalStars, averageStars, Object.keys(stars).map(star => stars[star]))}
 		</div>
 	);	
 };

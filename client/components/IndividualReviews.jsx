@@ -7,6 +7,7 @@ var star = (color) => (
 	  fill={color} />
 	</svg>
 );
+
 // genererate star rating
 var fillStars = (red) => {
 	var stars = Array(5);
