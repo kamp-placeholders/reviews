@@ -6,14 +6,13 @@ var fakeReview = (cb) => {
 		.then(res => res.text())
 		.then(text => {
 			var lorem = text.slice(2, text.length - 2);
-			console.log(lorem)
 			var review = {
 				'name': faker.name.firstName(),
 				'city': faker.address.city(),
 				'stars': faker.random.number() % 5 + 1,
 				'pastReviews': faker.random.number(),
 				'isVIP': faker.random.boolean(),
-				'date': `${faker.date.recent().toLocaleString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' })}`,
+				'date': `${faker.date.past().toLocaleString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' })}`,
 				'review': {
 					'post': lorem,
 					'overall': faker.random.number() % 5 + 1,
@@ -29,7 +28,6 @@ var fakeReview = (cb) => {
 
 for (let i = 0; i < 5; i++) {
 	fakeReview((review) => {
-		console.log(review)
 		fetch('http://localhost:3004/api/reviews', { 
 			method: 'POST',
 			headers: {

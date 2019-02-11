@@ -16,7 +16,7 @@ fetch('/api/reviews', { method: 'GET' })
 
 var peel = (arr) => {
 	return arr.reduce((acc, cur) => {
-		acc.push(JSON.parse(cur.jsdoc));
+		acc.push(JSON.parse(cur.jdoc));
 		return acc;
 	}, []);
 };

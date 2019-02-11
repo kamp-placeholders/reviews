@@ -5,7 +5,7 @@ var connection = mysql.createConnection(config);
 
 var get = (cb) => {
 	connection.query(
-		`SELECT jsdoc FROM stuff`, (err, res) => {
+		`SELECT jdoc FROM reviews`, (err, res) => {
 			if (err) {
 				cb(err);
 			} else {
@@ -16,7 +16,7 @@ var get = (cb) => {
 
 var post = (json, cb) => {
 	connection.query(
-		`INSERT INTO stuff VALUES ('${JSON.stringify(json)}')`, (err, res) => {
+		`INSERT INTO reviews VALUES ('${JSON.stringify(json)}')`, (err, res) => {
 			if (err) {
 				cb(err);
 			} else {
@@ -27,7 +27,7 @@ var post = (json, cb) => {
 
 var deleteTable = (cb) => {
 	connection.query(
-		`DELETE FROM stuff`, (err, res) => {
+		`DELETE FROM reviews`, (err, res) => {
 			if (err) {
 				cb(err);
 			} else {

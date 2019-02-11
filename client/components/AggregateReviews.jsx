@@ -124,7 +124,6 @@ var AggregateReviews = (props) => {
 					}
 				</div>
 			</div>
-		{console.log(stars, totalStars, averageStars, Object.keys(stars).map(star => stars[star]))}
 		</div>
 	);	
 };
