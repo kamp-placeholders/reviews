@@ -1,6 +1,8 @@
 var faker = require('faker');
 var fetch = require('node-fetch');
 
+var SEED_AMOUNT = 5;
+
 var fakeReview = (cb) => {
 	fetch('http://baconipsum.com/api?type=meat-and-filler&sentences=2')
 		.then(res => res.text())
@@ -26,7 +28,7 @@ var fakeReview = (cb) => {
 		})
 }
 
-for (let i = 0; i < 5; i++) {
+for (let i = 0; i < SEED_AMOUNT; i++) {
 	fakeReview((review) => {
 		fetch('http://localhost:3004/api/reviews', { 
 			method: 'POST',
@@ -37,3 +39,5 @@ for (let i = 0; i < 5; i++) {
 		})
 	})
 }
+
+console.log(`SEEDED ${SEED_AMOUNT} MORE`);

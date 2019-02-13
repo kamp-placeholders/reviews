@@ -12,6 +12,9 @@
 
 #reviews .reviewsSummary .aggregate {
 	display: flex;
+	border-bottom: 1px solid grey;
+	padding-bottom: 1rem;
+	margin-bottom: 1rem;
 }
 
 #reviews .reviewsSummary .aggregate .leftAggregate {
@@ -116,6 +119,38 @@
 #reviews .reviewsSummary .aggregate .starBar .redBar {
 	background: crimson;
 	height: 100%;
+}
+
+#reviews .reviewToolbar {
+	margin-bottom: 1rem;
+}
+
+#reviews .reviewToolbar .sortBy {
+	margin-bottom: 1rem;
+}
+
+#reviews .reviewToolbar select {
+	margin-bottom: 1rem;
+}
+
+#reviews .reviewToolbar .filters {
+	margin-bottom: 1rem;
+}
+
+#reviews .reviewToolbar .unselected {
+	border: 1px solid grey;
+	margin-right: 1rem;
+	padding: .3rem .3rem;
+}
+
+#reviews .reviewToolbar .unselected:hover {
+	border: 2px solid crimson;
+}
+
+#reviews .reviewToolbar .selected {
+	border: 2px solid crimson;	
+	margin-right: 1rem;
+	padding: .3rem .3rem;
 }
 
 #reviews .review {
