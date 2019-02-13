@@ -1,10 +1,161 @@
 #reviews {
+	font-family: Segoe UI;
+}
+
+#reviews .reviewsSummary .reviewsCount {
+	font-size: 1.5rem;
+	font-weight: bold;
+	padding-bottom: 1rem;
+	margin-bottom: 1rem;
+	border-bottom: 1px solid grey;
+}
+
+#reviews .reviewsSummary .aggregate {
+	display: flex;
+	border-bottom: 1px solid grey;
+	padding-bottom: 1rem;
+	margin-bottom: 1rem;
+}
+
+#reviews .reviewsSummary .aggregate .leftAggregate {
+	margin-right: 2rem;
+}
+
+#reviews .reviewsSummary .aggregate .description {
+	font-weight: 500;
+	padding-bottom: 1rem;
+}
+
+#reviews .reviewsSummary .aggregate .overallStars {
+	display: flex;
+	font-size: .875rem;
+	padding-bottom: 1rem;
+}
+
+#reviews .reviewsSummary .aggregate .overallStars .overlay {
+	display: flex;
+	width: 80px;
+	margin-right: 1rem;
+}
+
+#reviews .reviewsSummary .aggregate .overallStars .background {
+	display: block;
+	position: absolute;
+	float: left;
+}
+
+#reviews .reviewsSummary .aggregate .overallStars .foreground {
+	display: block;
+	position: absolute;
+	float: left;
+}
+
+#reviews .dynamicWidth {
+	overflow: hidden;
+	height: 1rem;
+	white-space: nowrap;
+}
+
+#reviews .reviewsSummary .aggregate .metrics {
+	display: flex;
+	flex-direction: row;
+}
+
+#reviews .reviewsSummary .aggregate .metrics .metric {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	position: relative;
+	padding: 0 .5rem;
+}
+
+#reviews .reviewsSummary .aggregate .metrics .metric .metricValue {
+	font-weight: 500;
+}
+
+#reviews .reviewsSummary .aggregate .metrics .metric .metricName {
+	text-transform: capitalize;
+}
+
+#reviews .reviewsSummary .aggregate .metrics .metric:not(:last-child):after {
+	display: block;
+	position: absolute;
+	right: 0;
+	background: lightGray;
+	content: '';
+	height: 100%;
+	width: 1px;
+}
+
+#reviews .reviewsSummary .aggregate .aggregateStars {
+	display: flex;
+	flex-direction: column;
+	padding-top: 2rem;
+	width: 16rem;
+}
+
+#reviews .reviewsSummary .aggregate .starBar {
+	display: flex;
+	padding-bottom: .5rem;
+	align-items: center;
+}
+
+#reviews .reviewsSummary .aggregate .starBar .star {
+	padding-right: .5rem;
+	width: 1rem;
+	text-align: center;
+}
+
+#reviews .reviewsSummary .aggregate .starBar .bar {
+	display: flex;
+	flex: auto;
+	align-items: center;
+	border: 1px solid lightGray;
+	box-sizing: border-box;
+	width: 100%;
+	height: 1rem;
+}
+
+#reviews .reviewsSummary .aggregate .starBar .redBar {
+	background: crimson;
+	height: 100%;
+}
+
+#reviews .reviewToolbar {
+	margin-bottom: 1rem;
+}
+
+#reviews .reviewToolbar .sortBy {
+	margin-bottom: 1rem;
+}
+
+#reviews .reviewToolbar select {
+	margin-bottom: 1rem;
+}
+
+#reviews .reviewToolbar .filters {
+	margin-bottom: 1rem;
+}
+
+#reviews .reviewToolbar .unselected {
+	border: 1px solid grey;
+	margin-right: 1rem;
+	padding: .3rem .3rem;
+}
+
+#reviews .reviewToolbar .unselected:hover {
+	border: 2px solid crimson;
+}
+
+#reviews .reviewToolbar .selected {
+	border: 2px solid crimson;	
+	margin-right: 1rem;
+	padding: .3rem .3rem;
 }
 
 #reviews .review {
 	display: flex;
 	flex-direction: row;
-	font-family: Segoe UI;
 	color: darkBlue;
 	padding-top: 1rem;
 	padding-bottom: 1rem;
@@ -21,6 +172,7 @@
 	margin-left: 1rem;
 	margin-right: 1rem;
 	width: 6rem;
+	flex: none;
 }
 
 #reviews .review .profile .circle {

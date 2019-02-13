@@ -4,7 +4,7 @@ CREATE DATABASE reviews;
 
 USE reviews;
 
-CREATE TABLE stuff (jdoc JSON);
+CREATE TABLE reviews (jdoc JSON);
 
 -- EXECUTE THIS FILE IN COMMAND LINE BY TYPING:
 -- mysql -u <USER> < schema.sql
