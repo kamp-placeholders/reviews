@@ -1,9 +1,10 @@
 import React from 'react';
-import { shallow, configure } from 'enzyme';
+import { shallow, mount, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 configure({adapter: new Adapter()});
 
+import App from '../client/components/App.jsx';
 import IndividualReviews from '../client/components/IndividualReviews.jsx';
 import AggregateReviews from '../client/components/AggregateReviews.jsx';
 import sample from '../client/sampleData.js';
@@ -30,8 +31,6 @@ describe('Individual Reviews Component', () => {
 		expect(toolbar).toBe(true);
 	});
 
-	// will add more tests targeting the toolbar
-
 });
 
 describe('Aggregate Reviews Component', () => {
@@ -56,6 +55,40 @@ describe('Aggregate Reviews Component', () => {
 		expect(renderedRatings.text()).toMatch(new RegExp(expectedRatings));
 	});
 
-	// will add more test coverage including bar ratings
+});
+
+describe('Reviews Toolbar Component', () => {
+
+	var wrapper = mount(<App reviews={sample} />);
+
+	test('there is an Individual Reviews component', () => {
+		expect(wrapper.exists('.individualReviews')).toBe(true);
+	});
+
+	test('there is an Aggregate Reviews component', () => {
+		expect(wrapper.exists('.aggregateReviews')).toBe(true);
+	});
+
+	test('clicking star bar generates star filter checkbox', () => {
+		var bars = wrapper.find('.aggregateStars');
+		var bar = bars.findWhere(n => {
+			var node = n.getDOMNode();
+			return node && node.classList.contains('starBar') && node.dataset.stars === '5';
+		});
+		expect(bar.exists()).toBe(true);
+		expect(wrapper
+			.find('.reviewToolbar')
+			.findWhere(n => n.getDOMNode() && n.getDOMNode().dataset.isstarfilter === 'true')
+			.exists())
+			.toBe(false);
+		expect(wrapper.state().starFilter).toBe(null);
+		bar.simulate('click', { target: { dataset: { stars: '5' }}});
+		expect(wrapper.state().starFilter).toBe('5');
+		expect(wrapper
+			.find('.reviewToolbar')
+			.findWhere(n => n.getDOMNode() && n.getDOMNode().dataset.isstarfilter === 'true')
+			.exists())
+			.toBe(true);
+	});
 
 });

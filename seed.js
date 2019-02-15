@@ -1,7 +1,10 @@
 var faker = require('faker');
 var fetch = require('node-fetch');
 
-var SEED_AMOUNT = 5;
+console.log(process.argv);
+// node seed.js [SEED_AMOUNT]
+
+var SEED_AMOUNT = process.argv[2] || 5;
 
 var fakeReview = (cb) => {
 	fetch('http://baconipsum.com/api?type=meat-and-filler&sentences=2')
@@ -23,7 +26,6 @@ var fakeReview = (cb) => {
 					'ambience': faker.random.number() % 5 + 1
 				}
 			};
-			// console.log(review)
 			cb(review);
 		})
 }

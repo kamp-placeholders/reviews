@@ -2,7 +2,7 @@
 	font-family: Segoe UI;
 }
 
-#reviews .reviewsSummary .reviewsCount {
+#reviews .aggregateReviews .reviewsCount {
 	font-size: 1.5rem;
 	font-weight: bold;
 	padding-bottom: 1rem;
@@ -10,41 +10,41 @@
 	border-bottom: 1px solid grey;
 }
 
-#reviews .reviewsSummary .aggregate {
+#reviews .aggregateReviews .aggregate {
 	display: flex;
 	border-bottom: 1px solid grey;
 	padding-bottom: 1rem;
 	margin-bottom: 1rem;
 }
 
-#reviews .reviewsSummary .aggregate .leftAggregate {
+#reviews .aggregateReviews .aggregate .leftAggregate {
 	margin-right: 2rem;
 }
 
-#reviews .reviewsSummary .aggregate .description {
+#reviews .aggregateReviews .aggregate .description {
 	font-weight: 500;
 	padding-bottom: 1rem;
 }
 
-#reviews .reviewsSummary .aggregate .overallStars {
+#reviews .aggregateReviews .aggregate .overallStars {
 	display: flex;
 	font-size: .875rem;
 	padding-bottom: 1rem;
 }
 
-#reviews .reviewsSummary .aggregate .overallStars .overlay {
+#reviews .aggregateReviews .aggregate .overallStars .overlay {
 	display: flex;
 	width: 80px;
 	margin-right: 1rem;
 }
 
-#reviews .reviewsSummary .aggregate .overallStars .background {
+#reviews .aggregateReviews .aggregate .overallStars .background {
 	display: block;
 	position: absolute;
 	float: left;
 }
 
-#reviews .reviewsSummary .aggregate .overallStars .foreground {
+#reviews .aggregateReviews .aggregate .overallStars .foreground {
 	display: block;
 	position: absolute;
 	float: left;
@@ -56,12 +56,12 @@
 	white-space: nowrap;
 }
 
-#reviews .reviewsSummary .aggregate .metrics {
+#reviews .aggregateReviews .aggregate .metrics {
 	display: flex;
 	flex-direction: row;
 }
 
-#reviews .reviewsSummary .aggregate .metrics .metric {
+#reviews .aggregateReviews .aggregate .metrics .metric {
 	display: flex;
 	flex-direction: column;
 	text-align: center;
@@ -69,15 +69,15 @@
 	padding: 0 .5rem;
 }
 
-#reviews .reviewsSummary .aggregate .metrics .metric .metricValue {
+#reviews .aggregateReviews .aggregate .metrics .metric .metricValue {
 	font-weight: 500;
 }
 
-#reviews .reviewsSummary .aggregate .metrics .metric .metricName {
+#reviews .aggregateReviews .aggregate .metrics .metric .metricName {
 	text-transform: capitalize;
 }
 
-#reviews .reviewsSummary .aggregate .metrics .metric:not(:last-child):after {
+#reviews .aggregateReviews .aggregate .metrics .metric:not(:last-child):after {
 	display: block;
 	position: absolute;
 	right: 0;
@@ -87,26 +87,36 @@
 	width: 1px;
 }
 
-#reviews .reviewsSummary .aggregate .aggregateStars {
+#reviews .aggregateReviews .aggregate .aggregateStars {
 	display: flex;
 	flex-direction: column;
 	padding-top: 2rem;
 	width: 16rem;
 }
 
-#reviews .reviewsSummary .aggregate .starBar {
+#reviews .aggregateReviews .aggregate .starBar {
 	display: flex;
-	padding-bottom: .5rem;
+	padding: .25rem;
 	align-items: center;
 }
 
-#reviews .reviewsSummary .aggregate .starBar .star {
+#reviews .aggregateReviews .aggregate .starBar:hover {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+#reviews .hoverBar {
+	border: 2px solid crimson !important;
+}
+
+#reviews .aggregateReviews .aggregate .starBar .star {
 	padding-right: .5rem;
 	width: 1rem;
 	text-align: center;
+	pointer-events: none;
 }
 
-#reviews .reviewsSummary .aggregate .starBar .bar {
+#reviews .aggregateReviews .aggregate .starBar .bar {
 	display: flex;
 	flex: auto;
 	align-items: center;
@@ -114,11 +124,13 @@
 	box-sizing: border-box;
 	width: 100%;
 	height: 1rem;
+	pointer-events: none;
 }
 
-#reviews .reviewsSummary .aggregate .starBar .redBar {
+#reviews .aggregateReviews .aggregate .starBar .redBar {
 	background: crimson;
 	height: 100%;
+	pointer-events: none;
 }
 
 #reviews .reviewToolbar {
@@ -141,6 +153,7 @@
 	border: 1px solid grey;
 	margin-right: 1rem;
 	padding: .3rem .3rem;
+	cursor: pointer;
 }
 
 #reviews .reviewToolbar .unselected:hover {
@@ -151,6 +164,7 @@
 	border: 2px solid crimson;	
 	margin-right: 1rem;
 	padding: .3rem .3rem;
+	cursor: pointer;
 }
 
 #reviews .review {
