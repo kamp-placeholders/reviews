@@ -54,12 +54,14 @@ class IndividualReviews extends React.Component {
 			filteredReviews: this.props.reviews,
 			foods: {},
 			filteredFoods: {},
-			checkedFoods: new Set()
+			checkedFoods: new Set(),
+			starFilterPrev: this.props.starFilter
 		};
 		this.updateSort = this.updateSort.bind(this);
 		this.highlightText = this.highlightText.bind(this);	
 		this.applyFilter = this.applyFilter.bind(this);	
 		this.countDish = this.countDish.bind(this);	
+		this.removeStarFilter = this.removeStarFilter.bind(this);
 	}
 
 	componentDidMount() {
@@ -145,8 +147,47 @@ class IndividualReviews extends React.Component {
 		} else {
 			checkedFoods.add(name);
 		}
-		filtered = this.state.reviews.filter(a => includesAll(a.review.post.toLowerCase(), Array.from(checkedFoods)));	
+		if (Array.from(checkedFoods).some(food => e.target.innerText.match(new RegExp(food)))) {
+			filtered = this.state.filteredReviews.filter(a => includesAll(a.review.post.toLowerCase(), Array.from(checkedFoods)));				
+		} else {
+			var stars = this.props.starFilter;
+			filtered = this.state.reviews.filter(a => 
+				includesAll(a.review.post.toLowerCase(), Array.from(checkedFoods)) &&
+				stars ? a.stars == stars : true);				
+		}
 		this.setState({ filteredReviews: filtered, checkedFoods: checkedFoods }, this.updateFilteredFoods);
+	}
+
+	applyStarFilter() {
+		if (this.props.starFilter != this.state.starFilterPrev) {
+			var filtered;
+			if (!this.props.starFilter) {
+				filtered = this.state.reviews;
+			} else {
+				filtered = this.state.reviews.filter(a => a.stars == this.props.starFilter);
+			}
+			this.setState({ 
+				filteredReviews: filtered, 
+				starFilterPrev: this.props.starFilter
+			});			
+		}
+		if (this.props.starFilter) {
+			return (
+				<span
+					onClick={this.removeStarFilter}
+					data-isstarfilter='true'
+					className='selected'
+				>
+					{this.props.starFilter} stars
+				</span>
+			);
+		} else {
+			return null;
+		}
+	}
+
+	removeStarFilter() {
+		this.props.updateStarFilter(null);
 	}
 
 	countDish(dish) {
@@ -163,7 +204,7 @@ class IndividualReviews extends React.Component {
 
 	render() {
 		return (
-			<div>
+			<div className='individualReviews'>
 				<div className='reviewToolbar'>
 					<div className='sortBy'>Sort by</div>
 						<select onChange={this.updateSort}>
@@ -172,15 +213,18 @@ class IndividualReviews extends React.Component {
 							<option value='lowest'>Lowest rating</option>
 						</select>
 					<div className='filters'>Filters</div>
+					{ this.applyStarFilter() }
 					{ 
 						this.topFoods().map(food => (
+							this.countDish(food) ? 
 							<span 
 								onClick={this.applyFilter} 
-								data-name={food} 
+								data-name={food}
+								data-isstarfilter='false' 
 								className={Array.from(this.state.checkedFoods).includes(food) ? 'selected' : 'unselected'}
 							>
 								{food} ({ this.countDish(food) }) 
-							</span>
+							</span> : null
 						)) 
 					}
 				</div>
