@@ -3,6 +3,7 @@ const parser = require('body-parser');
 const morgan = require('morgan');
 const path = require('path');
 const fetch = require('node-fetch');
+const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 3004;
 
@@ -11,6 +12,8 @@ const foodProcessorAPI_KEY = require('./foodparser.config.js');
 
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, '../public')));
+
+app.use(cors());
 
 app.get('/api/reviews', (req, res) => {
 	db.get((results) => {
@@ -53,5 +56,5 @@ app.post('/api/foodtext', parser.text(), (req, res) => {
 })
 
 app.listen(port, () => {
-  console.log(`server running at: http://localhost:${port}`);
+  console.log(`Express reviews server running at: http://localhost:${port}`);
 });

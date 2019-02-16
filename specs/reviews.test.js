@@ -4,7 +4,7 @@ import Adapter from 'enzyme-adapter-react-16';
 
 configure({adapter: new Adapter()});
 
-import App from '../client/components/App.jsx';
+import Reviews from '../client/components/Reviews.jsx';
 import IndividualReviews from '../client/components/IndividualReviews.jsx';
 import AggregateReviews from '../client/components/AggregateReviews.jsx';
 import sample from '../client/sampleData.js';
@@ -59,7 +59,7 @@ describe('Aggregate Reviews Component', () => {
 
 describe('Reviews Toolbar Component', () => {
 
-	var wrapper = mount(<App reviews={sample} />);
+	var wrapper = mount(<Reviews reviews={sample} />);
 
 	test('there is an Individual Reviews component', () => {
 		expect(wrapper.exists('.individualReviews')).toBe(true);

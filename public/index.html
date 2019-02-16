@@ -3,10 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <title>reviews</title>
-  <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
   <div id="reviews">PEEL OFF</div>
+	<script src="/lib/react.development.js"></script>
+	<script src="/lib/react-dom.development.js"></script>
   <script src="http://localhost:3004/bundle.js"></script>
+  <script>
+  	fetch(`http://localhost:3004/api/reviews`, { method: 'GET' })
+			.then(res => res.json())
+			.then(json => {
+				// console.log(json)
+				// console.log(peel(json))
+				var data = peel(json)
+				ReactDOM.render(
+					React.createElement(Reviews, {reviews: data}, null), 
+					document.getElementById('reviews'));
+			})
+			.catch(err => console.error(err))
+
+		var peel = (arr) => {
+			return arr.reduce((acc, cur) => {
+				acc.push(JSON.parse(cur.jdoc));
+				return acc;
+			}, []);
+		};
+  </script>
 </body>
 </html>

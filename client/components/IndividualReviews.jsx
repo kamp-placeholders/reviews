@@ -1,5 +1,8 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import fetch from 'node-fetch';
+
+var port = process.env.PORT || 3004;
 
 // SVG template for rating stars
 var star = (color) => ( 
@@ -62,6 +65,7 @@ class IndividualReviews extends React.Component {
 		this.applyFilter = this.applyFilter.bind(this);	
 		this.countDish = this.countDish.bind(this);	
 		this.removeStarFilter = this.removeStarFilter.bind(this);
+		this.readMore = this.readMore.bind(this);
 	}
 
 	componentDidMount() {
@@ -72,7 +76,7 @@ class IndividualReviews extends React.Component {
 	updateFoods() {
 		var foods = this.state.foods;
 		this.state.filteredReviews.forEach(review => {
-			fetch('/api/foodtext', {
+			fetch(`http://localhost:${port}/api/foodtext`, {
 				method: 'POST',
 				headers: { 'ContentType': 'plain/text' },
 				body: review.review.post
@@ -91,7 +95,7 @@ class IndividualReviews extends React.Component {
 	updateFilteredFoods() {
 		var foods = {};
 		this.state.filteredReviews.forEach(review => {
-			fetch('/api/foodtext', {
+			fetch(`http://localhost:${port}/api/foodtext`, {
 				method: 'POST',
 				headers: { 'ContentType': 'plain/text' },
 				body: review.review.post
@@ -130,12 +134,33 @@ class IndividualReviews extends React.Component {
 	highlightText(text, highlight) {
 		var parts = text.split(new RegExp(`(${highlight.join('|')})`, 'gi'));
 		return (
-			<span className='post'>
+			<span className='post hide' ref={this.readMore}>
 				{
 					parts.map(part => highlight.includes(part.toLowerCase()) ? <b>{part}</b> : part)
 				}
 			</span>
 		);
+	}
+
+	expandPost(e) {
+		var classList = e.target.parentNode.querySelector('.post').classList;
+		if (classList.contains('hide')) {
+			classList.replace('hide', 'show');
+			e.target.innerText = '- Read Less';
+		} else {
+			classList.replace('show', 'hide');
+			e.target.innerText = '+ Read More';
+		}
+	}
+
+	readMore(e) {
+		if (e.scrollHeight > e.offsetHeight) {
+			var overflow = ReactDOM.render(
+				<div className='expand' onClick={this.expandPost}>+ Read More</div>, 
+				document.createElement('div')
+			);
+			ReactDOM.findDOMNode(e).parentNode.appendChild(overflow);
+		}
 	}
 
 	applyFilter(e) {

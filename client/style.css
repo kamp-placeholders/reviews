@@ -1,5 +1,7 @@
 #reviews {
 	font-family: Segoe UI;
+	margin: 0 1rem;
+	width: 640px;
 }
 
 #reviews .aggregateReviews .reviewsCount {
@@ -268,4 +270,24 @@
 	white-space: pre-wrap;
 	margin-top: 1.5rem;
 	margin-bottom: 1.5rem;
+}
+
+#reviews .review .userReview .hide {
+	display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
+}
+
+#reviews .review .userReview .show {
+	display: inherit;
+}
+
+#reviews .review .userReview .expand {
+	cursor: pointer;
+	color: Crimson;
+}
+
+#reviews .review .userReview .expand:hover {
+	text-decoration: underline;
 }

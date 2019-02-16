@@ -2,8 +2,9 @@ import React from 'react';
 
 import AggregateReviews from './AggregateReviews.jsx';
 import IndividualReviews from './IndividualReviews.jsx';
+import '../style.css';
 
-class App extends React.Component {
+class Reviews extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -33,4 +34,4 @@ class App extends React.Component {
 	}
 }
 
-module.exports = App;
+module.exports = Reviews;
