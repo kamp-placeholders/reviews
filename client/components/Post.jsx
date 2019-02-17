@@ -21,20 +21,20 @@ class Post extends React.Component {
 		this.updateReadMore();
 	}
 
-	updateReadMore() {
-		var node = this.readMore.current
-		if (node.scrollHeight !== this.state.prev && node.scrollHeight > node.offsetHeight) {
-			this.setState({
-				readMore: <div className='expand' onClick={this.expandPost}>+ Read More</div>,
-				prev: node.scrollHeight
-			});
-		} else if (node.scrollHeight !== this.state.prev && node.scrollHeight <= node.offsetHeight) {
-			this.setState({
-				readMore: null,
-				prev: node.scrollHeight
-			});
-		}		
-	}
+updateReadMore() {
+	var node = this.readMore.current;
+	if (node.scrollHeight !== this.state.prev && node.scrollHeight > node.offsetHeight) {
+		this.setState({
+			readMore: <div className='expand' onClick={this.expandPost}>+ Read More</div>,
+			prev: node.scrollHeight
+		});
+	} else if (node.scrollHeight !== this.state.prev && node.scrollHeight <= node.offsetHeight) {
+		this.setState({
+			readMore: null,
+			prev: node.scrollHeight
+		});
+	}		
+}
 
 	highlightText(text, highlight) {
 		var parts = text.split(new RegExp(`(${highlight.join('|')})`, 'gi'));

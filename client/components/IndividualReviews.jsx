@@ -228,6 +228,9 @@ class IndividualReviews extends React.Component {
 								<div className='circle' style={{'backgroundColor': circleColorRoulette(review.name)}}>
 									{shortenName(review.name)}
 								</div>
+								{
+									review.isVIP ? <span className='VIP'>VIP</span> : null
+								}
 								<div className='author'>
 									{review.name}
 								</div>

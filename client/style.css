@@ -204,6 +204,17 @@
 	border-radius: 50%;
 }
 
+#reviews .review .profile .VIP {
+	position: absolute;
+	background-color: orange;
+	padding: 2px .5rem;
+	font-size: 12px;
+	border-radius: 1rem;
+	font-weight: 700;
+	left: 45px;
+	color: white;
+}
+
 #reviews .review .profile .author {
 	margin-top: .5rem;
 }
