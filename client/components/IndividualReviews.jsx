@@ -1,5 +1,10 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import fetch from 'node-fetch';
+
+import Post from './Post.jsx';
+
+var port = process.env.PORT || 3004;
 
 // SVG template for rating stars
 var star = (color) => ( 
@@ -57,8 +62,7 @@ class IndividualReviews extends React.Component {
 			checkedFoods: new Set(),
 			starFilterPrev: this.props.starFilter
 		};
-		this.updateSort = this.updateSort.bind(this);
-		this.highlightText = this.highlightText.bind(this);	
+		this.updateSort = this.updateSort.bind(this);	
 		this.applyFilter = this.applyFilter.bind(this);	
 		this.countDish = this.countDish.bind(this);	
 		this.removeStarFilter = this.removeStarFilter.bind(this);
@@ -72,7 +76,7 @@ class IndividualReviews extends React.Component {
 	updateFoods() {
 		var foods = this.state.foods;
 		this.state.filteredReviews.forEach(review => {
-			fetch('/api/foodtext', {
+			fetch(`http://localhost:${port}/api/foodtext`, {
 				method: 'POST',
 				headers: { 'ContentType': 'plain/text' },
 				body: review.review.post
@@ -91,7 +95,7 @@ class IndividualReviews extends React.Component {
 	updateFilteredFoods() {
 		var foods = {};
 		this.state.filteredReviews.forEach(review => {
-			fetch('/api/foodtext', {
+			fetch(`http://localhost:${port}/api/foodtext`, {
 				method: 'POST',
 				headers: { 'ContentType': 'plain/text' },
 				body: review.review.post
@@ -125,17 +129,6 @@ class IndividualReviews extends React.Component {
 				this.setState({ filteredReviews: sorted });
 				break;
 		}
-	}
-
-	highlightText(text, highlight) {
-		var parts = text.split(new RegExp(`(${highlight.join('|')})`, 'gi'));
-		return (
-			<span className='post'>
-				{
-					parts.map(part => highlight.includes(part.toLowerCase()) ? <b>{part}</b> : part)
-				}
-			</span>
-		);
 	}
 
 	applyFilter(e) {
@@ -235,6 +228,9 @@ class IndividualReviews extends React.Component {
 								<div className='circle' style={{'backgroundColor': circleColorRoulette(review.name)}}>
 									{shortenName(review.name)}
 								</div>
+								{
+									review.isVIP ? <span className='VIP'>VIP</span> : null
+								}
 								<div className='author'>
 									{review.name}
 								</div>
@@ -274,9 +270,10 @@ class IndividualReviews extends React.Component {
 										</div>
 									</div>
 								</div>
-								{
-									this.highlightText(review.review.post, Array.from(this.state.checkedFoods))
-								}
+								<Post 
+									post={review.review.post} 
+									checked={Array.from(this.state.checkedFoods)}
+								/>
 							</div>
 						</div>
 					))
