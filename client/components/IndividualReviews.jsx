@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import fetch from 'node-fetch';
 
+import Post from './Post.jsx';
+
 var port = process.env.PORT || 3004;
 
 // SVG template for rating stars
@@ -60,12 +62,10 @@ class IndividualReviews extends React.Component {
 			checkedFoods: new Set(),
 			starFilterPrev: this.props.starFilter
 		};
-		this.updateSort = this.updateSort.bind(this);
-		this.highlightText = this.highlightText.bind(this);	
+		this.updateSort = this.updateSort.bind(this);	
 		this.applyFilter = this.applyFilter.bind(this);	
 		this.countDish = this.countDish.bind(this);	
 		this.removeStarFilter = this.removeStarFilter.bind(this);
-		this.readMore = this.readMore.bind(this);
 	}
 
 	componentDidMount() {
@@ -128,38 +128,6 @@ class IndividualReviews extends React.Component {
 				sorted.sort((a, b) => (a.stars - b.stars));
 				this.setState({ filteredReviews: sorted });
 				break;
-		}
-	}
-
-	highlightText(text, highlight) {
-		var parts = text.split(new RegExp(`(${highlight.join('|')})`, 'gi'));
-		return (
-			<span className='post hide' ref={this.readMore}>
-				{
-					parts.map(part => highlight.includes(part.toLowerCase()) ? <b>{part}</b> : part)
-				}
-			</span>
-		);
-	}
-
-	expandPost(e) {
-		var classList = e.target.parentNode.querySelector('.post').classList;
-		if (classList.contains('hide')) {
-			classList.replace('hide', 'show');
-			e.target.innerText = '- Read Less';
-		} else {
-			classList.replace('show', 'hide');
-			e.target.innerText = '+ Read More';
-		}
-	}
-
-	readMore(e) {
-		if (e.scrollHeight > e.offsetHeight) {
-			var overflow = ReactDOM.render(
-				<div className='expand' onClick={this.expandPost}>+ Read More</div>, 
-				document.createElement('div')
-			);
-			ReactDOM.findDOMNode(e).parentNode.appendChild(overflow);
 		}
 	}
 
@@ -299,9 +267,10 @@ class IndividualReviews extends React.Component {
 										</div>
 									</div>
 								</div>
-								{
-									this.highlightText(review.review.post, Array.from(this.state.checkedFoods))
-								}
+								<Post 
+									post={review.review.post} 
+									checked={Array.from(this.state.checkedFoods)}
+								/>
 							</div>
 						</div>
 					))
