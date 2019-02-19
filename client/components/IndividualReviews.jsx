@@ -69,8 +69,22 @@ class IndividualReviews extends React.Component {
 	}
 
 	componentDidMount() {
-		this.updateFoods();
-		this.updateFilteredFoods();
+		if (this.props.reviews) {
+			this.updateFoods();
+			this.updateFilteredFoods();			
+		}
+	}
+
+	componentDidUpdate(prevProps) {
+		if (this.props.reviews !== prevProps.reviews) {
+			this.setState({
+				reviews: this.props.reviews,
+				filteredReviews: this.props.reviews
+			}, () => {
+				this.updateFoods();
+				this.updateFilteredFoods();						
+			})				
+		}
 	}
 
 	updateFoods() {
@@ -196,90 +210,97 @@ class IndividualReviews extends React.Component {
 	}
 
 	render() {
-		return (
-			<div className='individualReviews'>
-				<div className='reviewToolbar'>
-					<div className='sortBy'>Sort by</div>
-						<select onChange={this.updateSort}>
-							<option value='newest'>Newest</option>
-							<option value='highest'>Highest rating</option>
-							<option value='lowest'>Lowest rating</option>
-						</select>
-					<div className='filters'>Filters</div>
-					{ this.applyStarFilter() }
-					{ 
-						this.topFoods().map(food => (
-							this.countDish(food) ? 
-							<span 
-								onClick={this.applyFilter} 
-								data-name={food}
-								data-isstarfilter='false' 
-								className={Array.from(this.state.checkedFoods).includes(food) ? 'selected' : 'unselected'}
-							>
-								{food} ({ this.countDish(food) }) 
-							</span> : null
-						)) 
+		if (this.state.filteredReviews) {
+			return (
+				<div className='individualReviews'>
+					<div className='reviewToolbar'>
+						<div className='sortBy'>Sort by</div>
+							<select onChange={this.updateSort}>
+								<option value='newest'>Newest</option>
+								<option value='highest'>Highest rating</option>
+								<option value='lowest'>Lowest rating</option>
+							</select>
+						<div className='filters'>Filters</div>
+						{ this.applyStarFilter() }
+						{ 
+							this.topFoods().map(food => (
+								this.countDish(food) ? 
+								<span 
+									onClick={this.applyFilter} 
+									data-name={food}
+									data-isstarfilter='false' 
+									className={Array.from(this.state.checkedFoods).includes(food) ? 'selected' : 'unselected'}
+								>
+									{food} ({ this.countDish(food) }) 
+								</span> : null
+							)) 
+						}
+					</div>
+					{
+						this.state.filteredReviews.map(review => (
+							<div className='review'>
+								<div className='profile'>
+									<div className='circle' style={{'backgroundColor': circleColorRoulette(review.name)}}>
+										{shortenName(review.name)}
+									</div>
+									{
+										review.isVIP ? <span className='VIP'>VIP</span> : null
+									}
+									<div className='author'>
+										{review.name}
+									</div>
+									<div className='city'>
+										{review.city}
+									</div>
+									<div className='pastReviews'>
+										{`${review.pastReviews} reviews`}
+									</div>
+								</div>
+								<div className='userReview'>
+									<div className='banner'>
+										<div className='starsAndDate'>
+											<div className='stars'>
+												{fillStars(review.stars)}
+											</div>
+											<div className='date'>
+												{review.date}
+											</div>
+										</div>
+										<div className='ratings'>
+											Overall
+											<div className='overall'>
+												{review.review.overall}
+											</div>
+											Food
+											<div className='food'>
+												{review.review.food}
+											</div>
+											Service
+											<div className='service'>
+												{review.review.service}
+											</div>
+											Ambience
+											<div className='ambience'>
+												{review.review.ambience}
+											</div>
+										</div>
+									</div>
+									<Post 
+										post={review.review.post} 
+										checked={Array.from(this.state.checkedFoods)}
+									/>
+								</div>
+							</div>
+						))
 					}
 				</div>
-				{
-					this.state.filteredReviews.map(review => (
-						<div className='review'>
-							<div className='profile'>
-								<div className='circle' style={{'backgroundColor': circleColorRoulette(review.name)}}>
-									{shortenName(review.name)}
-								</div>
-								{
-									review.isVIP ? <span className='VIP'>VIP</span> : null
-								}
-								<div className='author'>
-									{review.name}
-								</div>
-								<div className='city'>
-									{review.city}
-								</div>
-								<div className='pastReviews'>
-									{`${review.pastReviews} reviews`}
-								</div>
-							</div>
-							<div className='userReview'>
-								<div className='banner'>
-									<div className='starsAndDate'>
-										<div className='stars'>
-											{fillStars(review.stars)}
-										</div>
-										<div className='date'>
-											{review.date}
-										</div>
-									</div>
-									<div className='ratings'>
-										Overall
-										<div className='overall'>
-											{review.review.overall}
-										</div>
-										Food
-										<div className='food'>
-											{review.review.food}
-										</div>
-										Service
-										<div className='service'>
-											{review.review.service}
-										</div>
-										Ambience
-										<div className='ambience'>
-											{review.review.ambience}
-										</div>
-									</div>
-								</div>
-								<Post 
-									post={review.review.post} 
-									checked={Array.from(this.state.checkedFoods)}
-								/>
-							</div>
-						</div>
-					))
-				}
-			</div>
-		);
+			);
+		} else {
+			console.log('INDIVIDUAL LOADING REVIEWS')
+			return (
+				<div>LOADING REVIEWS</div>
+			);
+		}
 	}
 };
 

@@ -74,88 +74,95 @@ class AggregateReviews extends React.Component {
 	}
 
 	render() {
-		var metrics = this.props.reviews.map(review => neuter(review.review, 'post'));
-		var averageMetrics = {};
-		metrics.forEach(metric => {
-			var keys = Object.keys(metric);
-			for (var key of keys) {
-				averageMetrics[key] = averageMetrics[key] ? averageMetrics[key] + metric[key] : metric[key];
+		if (this.props.reviews) {
+			var metrics = this.	props.reviews.map(review => neuter(review.review, 'post'));
+			var averageMetrics = {};
+			metrics.forEach(metric => {
+				var keys = Object.keys(metric);
+				for (var key of keys) {
+					averageMetrics[key] = averageMetrics[key] ? averageMetrics[key] + metric[key] : metric[key];
+				}
+			});
+			var averageMetricKeys = Object.keys(averageMetrics);
+			for (var averageMetricKey of averageMetricKeys) {
+				averageMetrics[averageMetricKey] /= this.props.reviews.length;
+				averageMetrics[averageMetricKey] = averageMetrics[averageMetricKey].toFixed(1);
 			}
-		});
-		var averageMetricKeys = Object.keys(averageMetrics);
-		for (var averageMetricKey of averageMetricKeys) {
-			averageMetrics[averageMetricKey] /= this.props.reviews.length;
-			averageMetrics[averageMetricKey] = averageMetrics[averageMetricKey].toFixed(1);
-		}
-		var stars = collectRatings(this.props.reviews, 'stars', false);
-		var totalStars = Object.keys(stars).reduce((acc, cur) => {
-			return acc + Number(stars[cur]);
-		}, 0);
-		var starsProportion = {};
-		Object.keys(stars).forEach(key => {
-			starsProportion[key] = stars[key] / totalStars * 100;
-		});
-		var averageStars = sum(Object.keys(stars).map(star => stars[star] * Number(star))) / sum(Object.keys(stars).map(star => stars[star]));
-		return (
-			<div className='aggregateReviews'>
-				<div className='reviewsCount'>
-					What {this.props.reviews.length} people are saying
-				</div>
-				<div className='aggregate'>
-					<div className='leftAggregate'>
-						<div className='description'>
-							Overall ratings and reviews
-						</div>
-						<div className='overallStars'>
-							<div className='overlay'>
-								<div className='background'>
-									{ fillStars(0, 100) }
-								</div>
-								<div className="foreground">
-									{ fillStars(5, averageStars / 5 * 100) }
-								</div>
+			var stars = collectRatings(this.props.reviews, 'stars', false);
+			var totalStars = Object.keys(stars).reduce((acc, cur) => {
+				return acc + Number(stars[cur]);
+			}, 0);
+			var starsProportion = {};
+			Object.keys(stars).forEach(key => {
+				starsProportion[key] = stars[key] / totalStars * 100;
+			});
+			var averageStars = sum(Object.keys(stars).map(star => stars[star] * Number(star))) / sum(Object.keys(stars).map(star => stars[star]));
+			return (
+				<div className='aggregateReviews'>
+					<div className='reviewsCount'>
+						What {this.props.reviews.length} people are saying
+					</div>
+					<div className='aggregate'>
+						<div className='leftAggregate'>
+							<div className='description'>
+								Overall ratings and reviews
 							</div>
-							{ (averageStars).toFixed(1) } based on recent ratings
-						</div>
-						<div className='metrics'>
-							{
-								averageMetricKeys.map(averageMetric => (
-									<div className='metric'>
-										<div className='metricValue'>
-											{averageMetrics[averageMetric]}
+							<div className='overallStars'>
+								<div className='overlay'>
+									<div className='background'>
+										{ fillStars(0, 100) }
+									</div>
+									<div className="foreground">
+										{ fillStars(5, averageStars / 5 * 100) }
+									</div>
+								</div>
+								{ (averageStars).toFixed(1) } based on recent ratings
+							</div>
+							<div className='metrics'>
+								{
+									averageMetricKeys.map(averageMetric => (
+										<div className='metric'>
+											<div className='metricValue'>
+												{averageMetrics[averageMetric]}
+											</div>
+											<div className='metricName'>
+												{averageMetric}
+											</div>
 										</div>
-										<div className='metricName'>
-											{averageMetric}
+									))
+								}
+							</div>
+						</div>
+						<div className='aggregateStars'>
+							{
+								Object.keys(stars).reverse().map(star => (
+									<div 
+										className='starBar' 
+										onMouseEnter={this.addBorder} 
+										onMouseLeave={this.removeBorder}
+										onClick={this.addStarFilter}
+										data-stars={star}
+									>
+										<span className='star'>
+											{star}
+										</span>
+										<div className='bar'>
+											<span style={{'width': `${starsProportion[star]}%`}} className='redBar'></span>
 										</div>
 									</div>
 								))
 							}
 						</div>
 					</div>
-					<div className='aggregateStars'>
-						{
-							Object.keys(stars).reverse().map(star => (
-								<div 
-									className='starBar' 
-									onMouseEnter={this.addBorder} 
-									onMouseLeave={this.removeBorder}
-									onClick={this.addStarFilter}
-									data-stars={star}
-								>
-									<span className='star'>
-										{star}
-									</span>
-									<div className='bar'>
-										<span style={{'width': `${starsProportion[star]}%`}} className='redBar'></span>
-									</div>
-								</div>
-							))
-						}
-					</div>
 				</div>
-			</div>
-		);	
-	}
+			);	
+		} else {
+			console.log('AGGREGATE LOADING REVIEWS')
+			return (
+				<div>LOADING REVIEWS</div>
+			);
+		}
+	}						
 }
 
 module.exports = AggregateReviews;
