@@ -205,13 +205,14 @@
 }
 
 #reviews .review .profile .VIP {
-	position: absolute;
+	position: relative;
 	background-color: orange;
 	padding: 2px .5rem;
 	font-size: 12px;
 	border-radius: 1rem;
 	font-weight: 700;
-	left: 45px;
+	top: -55px;
+	left: -25px;
 	color: white;
 }
 
