@@ -24,8 +24,9 @@ coverage
 build/
 dist/
 public/bundle.js
-server/db/config.js
-server/foodparser.config.js
+# server/db/config.js
+# server/foodparser.config.js
+
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
