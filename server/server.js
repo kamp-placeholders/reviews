@@ -5,7 +5,7 @@ const path = require('path');
 const fetch = require('node-fetch');
 const cors = require('cors');
 const app = express();
-const port = process.env.PORT || 3004;
+const port = process.env.PORT || 8081;
 
 const db = require('./db');
 const foodProcessorAPI_KEY = require('./foodparser.config.js');

@@ -8,7 +8,8 @@
     "node": ">=6.13.0"
   },
   "scripts": {
-    "start": "nodemon ./server/server.js",
+    "start": "node ./server/server.js",
+    "docker": "node ./server/server.js",
     "build": "webpack -w",
     "test": "jest",
     "seed": "node seed.js"

@@ -4,7 +4,7 @@ import fetch from 'node-fetch';
 
 import Post from './Post.jsx';
 
-var port = process.env.PORT || 3004;
+var port = process.env.PORT || 8081;
 
 // SVG template for rating stars
 var star = (color) => ( 

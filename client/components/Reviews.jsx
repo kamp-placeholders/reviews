@@ -4,7 +4,7 @@ import AggregateReviews from './AggregateReviews.jsx';
 import IndividualReviews from './IndividualReviews.jsx';
 import '../style.css';
 
-var port = process.env.PORT || 3004;
+var port = process.env.PORT || 8081;
 
 class Reviews extends React.Component {
 	constructor(props) {

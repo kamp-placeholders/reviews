@@ -26,3 +26,10 @@ dist/
 public/bundle.js
 server/db/config.js
 server/foodparser.config.js
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+
+# Zipped files
+folder.zip
