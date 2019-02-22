@@ -4,8 +4,6 @@ import AggregateReviews from './AggregateReviews.jsx';
 import IndividualReviews from './IndividualReviews.jsx';
 import '../style.css';
 
-var port = process.env.PORT || 8081;
-
 class Reviews extends React.Component {
 	constructor(props) {
 		super(props);
@@ -18,7 +16,7 @@ class Reviews extends React.Component {
 
 	componentWillMount() {
 		var restaurant_id = window.location.pathname.split('/')[1] !== '' ? Number(window.location.pathname.split('/')[1]) : 1;
-  	fetch(`http://localhost:${port}/api/reviews`, { method: 'GET' })
+  	fetch(`/api/reviews`, { method: 'GET' })
 			.then(res => res.json())
 			.then(json => {
 				// console.log(json)

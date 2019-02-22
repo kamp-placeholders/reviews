@@ -4,8 +4,6 @@ import fetch from 'node-fetch';
 
 import Post from './Post.jsx';
 
-var port = process.env.PORT || 8081;
-
 // SVG template for rating stars
 var star = (color) => ( 
 	<svg height="16px" width="16px" viewBox="-1 -1 2 2">
@@ -109,7 +107,7 @@ class IndividualReviews extends React.Component {
 	updateFilteredFoods() {
 		var foods = {};
 		this.state.filteredReviews.forEach(review => {
-			fetch(`http://localhost:${port}/api/foodtext`, {
+			fetch(`/api/foodtext`, {
 				method: 'POST',
 				headers: { 'ContentType': 'plain/text' },
 				body: review.review.post
