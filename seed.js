@@ -6,12 +6,13 @@ console.log(process.argv);
 
 var SEED_AMOUNT = process.argv[2] || 5;
 
-var fakeReview = (cb) => {
+var fakeReview = (id, cb) => {
 	fetch('http://baconipsum.com/api?type=meat-and-filler&sentences=2')
 		.then(res => res.text())
 		.then(text => {
 			var lorem = text.slice(2, text.length - 2);
 			var review = {
+				'restaurant_id': id,
 				'name': faker.name.firstName(),
 				'city': faker.address.city(),
 				'stars': faker.random.number() % 5 + 1,
@@ -31,15 +32,17 @@ var fakeReview = (cb) => {
 }
 
 for (let i = 0; i < SEED_AMOUNT; i++) {
-	fakeReview((review) => {
-		fetch('http://localhost:3004/api/reviews', { 
-			method: 'POST',
-			headers: {
-				'content-type': 'application/json'		
-			},
-			body: JSON.stringify(review)
+	for (let j = 0; j < 5; j++) {
+		fakeReview(i, (review) => {
+			fetch('http://localhost:8081/api/reviews', { 
+				method: 'POST',
+				headers: {
+					'content-type': 'application/json'		
+				},
+				body: JSON.stringify(review)
+			})
 		})
-	})
+	}
 }
 
 console.log(`SEEDED ${SEED_AMOUNT} MORE`);

@@ -17,12 +17,13 @@ class Reviews extends React.Component {
 	}
 
 	componentWillMount() {
+		var restaurant_id = window.location.pathname.split('/')[1] !== '' ? Number(window.location.pathname.split('/')[1]) : 1;
   	fetch(`http://localhost:${port}/api/reviews`, { method: 'GET' })
 			.then(res => res.json())
 			.then(json => {
 				// console.log(json)
-				// console.log(this.peel(json))
-				var data = this.peel(json)
+				console.log(this.peel(json, restaurant_id))
+				var data = this.peel(json, restaurant_id)
 				this.setState({ reviews: data })
 			})
 			.catch(err => console.error(err))
@@ -32,11 +33,12 @@ class Reviews extends React.Component {
 		this.setState({ starFilter: star });
 	}
 
-	peel(arr) {
+	peel(arr, id) {
 		return arr.reduce((acc, cur) => {
 			acc.push(JSON.parse(cur.jdoc));
 			return acc;
-		}, []);		
+		}, [])
+		.filter(e => e.restaurant_id === id);		
 	}
 
 	render() {
