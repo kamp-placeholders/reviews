@@ -88,7 +88,7 @@ class IndividualReviews extends React.Component {
 	updateFoods() {
 		var foods = this.state.foods;
 		this.state.filteredReviews.forEach(review => {
-			fetch(`http://localhost:${port}/api/foodtext`, {
+			fetch(`/api/foodtext`, {
 				method: 'POST',
 				headers: { 'ContentType': 'plain/text' },
 				body: review.review.post
