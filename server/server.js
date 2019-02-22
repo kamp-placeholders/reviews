@@ -9,13 +9,17 @@ const port = process.env.PORT || 8081;
 
 const db = require('./db');
 const foodProcessorAPI_KEY = require('./foodparser.config.js');
-
-app.use(morgan('dev'));
-app.use('/:id', express.static(path.join(__dirname, '../public')));
+const public = path.join(__dirname, '../public');
 
 app.use(cors());
 
+app.use(morgan('dev'));
+app.use('/', express.static(public));
+app.use('/(\\d+)/', express.static(public));
+
+
 app.get('/api/reviews', (req, res) => {
+	console.log('PUBLIC:', public);
 	db.get((results) => {
 		res.send(results);
 	});
