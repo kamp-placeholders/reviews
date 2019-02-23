@@ -23,14 +23,16 @@ coverage
 # Compiled Dirs (http://nodejs.org/api/addons.html)
 build/
 dist/
-# public/bundle.js
-# server/db/config.js
-# server/foodparser.config.js
+public/bundle.js
+server/db/config.js
+server/foodparser.config.js
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
-!.elasticbeanstalk/*.cfg.yml
-!.elasticbeanstalk/*.global.yml
+.ebextensions/*
 
-# Zipped files
+# generated files
+$
+
+# zipped files
 folder.zip

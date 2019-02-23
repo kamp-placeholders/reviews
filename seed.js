@@ -1,10 +1,10 @@
 var faker = require('faker');
 var fetch = require('node-fetch');
 
-console.log(process.argv);
+console.log('process.argv:', process.argv);
 // node seed.js [SEED_AMOUNT]
 
-var SEED_AMOUNT = process.argv[2] || 5;
+var SEED_AMOUNT = process.argv[2] || 100;
 
 var fakeReview = (id, cb) => {
 	fetch('http://baconipsum.com/api?type=meat-and-filler&sentences=2')
@@ -31,18 +31,20 @@ var fakeReview = (id, cb) => {
 		})
 }
 
-for (let i = 0; i < SEED_AMOUNT; i++) {
-	for (let j = 0; j < 5; j++) {
-		fakeReview(i, (review) => {
-			fetch('http://localhost:8081/api/reviews', { 
-				method: 'POST',
-				headers: {
-					'content-type': 'application/json'		
-				},
-				body: JSON.stringify(review)
-			})
-		})
-	}
-}
+// for (let i = 0; i < SEED_AMOUNT; i++) {
+// 	for (let j = 0; j < 5; j++) {
+// 		fakeReview(i, (review) => {
+// 			fetch('/api/reviews', { 
+// 				method: 'POST',
+// 				headers: {
+// 					'content-type': 'application/json'		
+// 				},
+// 				body: JSON.stringify(review)
+// 			})
+// 		})
+// 	}
+// }
 
-console.log(`SEEDED ${SEED_AMOUNT} MORE`);
+// console.log(`SEEDED ${SEED_AMOUNT} MORE`);
+
+module.exports = fakeReview;

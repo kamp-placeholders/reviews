@@ -16,7 +16,7 @@ class Reviews extends React.Component {
 
 	componentWillMount() {
 		var restaurant_id = window.location.pathname.split('/')[1] !== '' ? Number(window.location.pathname.split('/')[1]) : 1;
-  	fetch(`/api/reviews`, { method: 'GET' })
+  	fetch(`http://reviews-port-8081-dev2.us-east-2.elasticbeanstalk.com/api/reviews`, { method: 'GET' })
 			.then(res => res.json())
 			.then(json => {
 				// console.log(json)

@@ -4,7 +4,8 @@ var config = require('./config.js');
 var connection = mysql.createConnection(config);
 
 connection.connect(err => {
-	if (err) console.log(err);
+	console.log('mysql config:', config);
+	if (err) console.log('mysql error:', err);
 	else console.log('mysql connected');
 });
 
