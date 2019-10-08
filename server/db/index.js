@@ -31,6 +31,19 @@ var post = (json, cb) => {
 	});
 };
 
+var createTable = (cb) => {
+	connection.query(`
+		USE reviews; 
+		CREATE TABLE reviews (jdoc JSON);
+		`, (err, res) => {
+			if (err) {
+				cb(err);
+			} else {
+				cb(res);
+			}
+	});
+};
+
 var deleteTable = (cb) => {
 	connection.query(
 		`DELETE FROM reviews`, (err, res) => {
@@ -45,5 +58,6 @@ var deleteTable = (cb) => {
 module.exports = {
 	get,
 	post,
+	createTable,
 	deleteTable
 };

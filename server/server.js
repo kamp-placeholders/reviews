@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const path = require('path');
 const fetch = require('node-fetch');
 const cors = require('cors');
+const compression = require('compression');
 const app = express();
 const port = process.env.PORT || 8081;
 
@@ -12,11 +13,12 @@ const foodProcessorAPI_KEY = require('./foodparser.config.js');
 const public = path.join(__dirname, '../public');
 const fakeReview = require('../seed.js');
 
+app.use(compression());
 app.use(cors());
 
 app.use(morgan('dev'));
 app.use('/', express.static(public));
-app.use('/(\\d+)/', express.static(public));
+app.use('/restaurants/(\\d+)/', express.static(public));
 
 
 app.get('/api/reviews', (req, res) => {
@@ -42,6 +44,13 @@ app.post('/api/reviews', parser.json(), (req, res) => {
 			console.log('posted');
 			res.send(results);
 		}
+	});
+});
+
+app.get('/api/createTable', (req, res) => {
+	db.createTable(results => {
+		console.log('CREATED TABLE');
+		res.send(results);
 	});
 });
 

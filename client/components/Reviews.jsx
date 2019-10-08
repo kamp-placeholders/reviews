@@ -2,6 +2,8 @@ import React from 'react';
 
 import AggregateReviews from './AggregateReviews.jsx';
 import IndividualReviews from './IndividualReviews.jsx';
+import host from './config.js'
+import sample from '../sampleData.js';
 import '../style.css';
 
 class Reviews extends React.Component {
@@ -15,16 +17,17 @@ class Reviews extends React.Component {
 	}
 
 	componentWillMount() {
-		var restaurant_id = window.location.pathname.split('/')[1] !== '' ? Number(window.location.pathname.split('/')[1]) : 1;
-  	fetch(`http://reviews-port-8081-dev2.us-east-2.elasticbeanstalk.com/api/reviews`, { method: 'GET' })
-			.then(res => res.json())
-			.then(json => {
-				// console.log(json)
-				console.log(this.peel(json, restaurant_id))
-				var data = this.peel(json, restaurant_id)
-				this.setState({ reviews: data })
-			})
-			.catch(err => console.error(err))
+	// 	var restaurant_id = window.location.pathname.split('/')[1] !== '' ? Number(window.location.pathname.split('/')[2]) : 1;
+  	// fetch(`${host}/api/reviews`, { method: 'GET' })
+	// 		.then(res => res.json())
+	// 		.then(json => {
+	// 			console.log(json)
+	// 			console.log(this.peel(json, restaurant_id))
+	// 			var data = this.peel(json, restaurant_id)
+	// 			this.setState({ reviews: data })
+	// 		})
+	// 		.catch(err => console.error(err))
+		this.setState({ reviews: sample })
 	}
 
 	updateStarFilter(star) {

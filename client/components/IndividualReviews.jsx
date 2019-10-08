@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import fetch from 'node-fetch';
 
 import Post from './Post.jsx';
+import host from './config.js'
 
 // SVG template for rating stars
 var star = (color) => ( 
@@ -88,7 +89,7 @@ class IndividualReviews extends React.Component {
 	updateFoods() {
 		var foods = this.state.foods;
 		this.state.filteredReviews.forEach(review => {
-			fetch(`http://reviews-port-8081-dev2.us-east-2.elasticbeanstalk.com/api/foodtext`, {
+			fetch(`${host}/api/foodtext`, {
 				method: 'POST',
 				headers: { 'ContentType': 'plain/text' },
 				body: review.review.post
@@ -107,7 +108,7 @@ class IndividualReviews extends React.Component {
 	updateFilteredFoods() {
 		var foods = {};
 		this.state.filteredReviews.forEach(review => {
-			fetch(`http://reviews-port-8081-dev2.us-east-2.elasticbeanstalk.com/api/foodtext`, {
+			fetch(`${host}/api/foodtext`, {
 				method: 'POST',
 				headers: { 'ContentType': 'plain/text' },
 				body: review.review.post
